@@ -15,8 +15,7 @@ from scrapy.exceptions import CloseSpider
 class AvitoSpider(CrawlSpider):
     name = 'avito_spider'
     allowed_domains = ['www.avito.ru']
-    start_urls = ['https://www.avito.ru/yaroslavl/kvartiry/prodam']
-    close_down = False
+    start_urls = []
     rules = (
         # Rule(
         #     LinkExtractor(
@@ -35,6 +34,12 @@ class AvitoSpider(CrawlSpider):
             follow=True
         ),
     )
+
+    def __init__(self, region='moskva', **kwargs):
+        regions = region.split()
+        for item in regions:
+            self.start_urls.append(f"https://www.avito.ru/{item}/kvartiry/prodam")
+        super().__init__(**kwargs)
 
     def handle_pagination(self, response):
         flat_items = response.xpath('//div[@data-marker="item"]')
@@ -86,5 +91,4 @@ class AvitoSpider(CrawlSpider):
             loader.add_xpath('photos', '//div[contains(@class, "gallery-extended-img-frame")]/@data-url')
             loader.add_xpath('created_at', '//div[@class="title-info-metadata-item-redesign"]/text()')
             loader.add_value('date_parse', datetime.now().isoformat())
-
             yield loader.load_item()
