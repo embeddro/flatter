@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#credentionals
+env.sh
+
+#proxylist
+#proxy_list.txt
