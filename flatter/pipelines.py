@@ -1,13 +1,6 @@
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-
-import psycopg2
 from .items import FlatPaginationItem, FlatParser
 from utilites.proxy_cheker import is_bad_proxy
 from utilites.db import PostgreSQL
-from psycopg2 import Error
 
 
 class FlatParserPipeline(object):
@@ -23,12 +16,27 @@ class FlatParserPipeline(object):
             res = self.db.insert_item('flat_pagination', item)
         elif isinstance(item, FlatParser):
             item['metr_price'] = int(float(item['price'])/float(item['area']))
+            item['updated_at'] = item['created_at']
             id_rec = self.db.get_id_from_flat_parser('url_base64', item['url_base64'])
             if id_rec:
                 self.db.update_item('flat_parser', item, 'id_rec', id_rec)
             else:
                 self.db.insert_item('flat_parser', item)
-        return item
+
+            id_pagination = self.db.get_id_from_flat_pagination('url', item['url'])
+            item_pagination = dict()
+            item_pagination['source'] = item['source']
+            item_pagination['url'] = item['url']
+            item_pagination['date_last_view'] = item['date_parse']
+            item_pagination['need_parse'] = 'false'
+            item_pagination['info'] = 'new'
+            item_pagination['date_change_sign'] = item['date_parse']
+            item_pagination['date_added'] = item['created_at']
+            if id_pagination:
+                self.db.update_item('flat_pagination', item_pagination, 'id', id_pagination)
+            else:
+                self.db.insert_item('flat_pagination', item_pagination)
+        return ''
 
 class ProxyPickerPipeline(object):
 

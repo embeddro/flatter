@@ -40,7 +40,10 @@ class FlatParser(scrapy.Item):
         output_processor=Join(),
     )
     country = scrapy.Field()
-    region = scrapy.Field()
+    region = scrapy.Field(
+        input_processor=MapCompose(remove_tags, str.strip),
+        output_processor=Join(),
+    )
     city = scrapy.Field()
     district = scrapy.Field()
     address = scrapy.Field()
@@ -82,7 +85,10 @@ class FlatParser(scrapy.Item):
         input_processor=Compose(select_first, remove_tags, str.strip, normalize_nfkd, select_parking),
         output_processor=TakeFirst(),
     )
-    owner_name = scrapy.Field()
+    owner_name = scrapy.Field(
+        input_processor=Compose(select_first, remove_tags, str.strip, normalize_nfkd),
+        output_processor=TakeFirst(),
+    )
     owner_phone = scrapy.Field()
     owner_email = scrapy.Field()
     photos = scrapy.Field(
