@@ -133,3 +133,6 @@ env.sh
 
 #proxylist
 #proxy_list.txt
+
+#docker env-file
+env_file
