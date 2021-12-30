@@ -9,7 +9,7 @@ class ProxyPickerSpider(scrapy.Spider):
         'EXTENSIONS': {
                         'scrapy.extensions.closespider.CloseSpider': 500
                        },
-        'CLOSESPIDER_TIMEOUT': '15',
+        'CLOSESPIDER_TIMEOUT': '900',
         'ITEM_PIPELINES': {
                         'flatter.pipelines.ProxyPickerPipeline': 300,
         },
