@@ -4,9 +4,7 @@ WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 
-RUN apt-get update -y && apt-get install -y \
-				libpq-dev \
-				python3-dev 
+RUN apt-get update -y && apt-get install -y libpq-dev python3-dev 
 
 RUN pip install --upgrade pip
 
