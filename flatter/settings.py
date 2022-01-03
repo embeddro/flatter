@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'flatter.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
+USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -89,9 +89,9 @@ ITEM_PIPELINES = {
 
 # Proxy settings
 # Retry many times since proxies often fail
-RETRY_TIMES = 10
+RETRY_TIMES = 5
 # Retry on most error codes since proxies fail for different reasons
-RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408]
+RETRY_HTTP_CODES = [500, 503, 504, 400, 403, 404, 408, 429]
 
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
