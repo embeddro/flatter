@@ -4,7 +4,7 @@ import scrapy
 class ProxyPickerSpider(scrapy.Spider):
     name = 'proxy_picker'
     allowed_domains = ['hidemy.name']
-    start_urls = ['https://hidemy.name/ru/proxy-list/?type=s']
+    start_urls = ['https://hidemy.name/ru/proxy-list/?type=s&anon=4']
     custom_settings = {
         'EXTENSIONS': {
                         'scrapy.extensions.closespider.CloseSpider': 500
