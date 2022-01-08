@@ -136,3 +136,4 @@ env.sh
 
 #docker env-file
 env_file
+res_*
