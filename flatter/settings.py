@@ -25,7 +25,7 @@ CONCURRENT_REQUESTS = 16
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 5
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -33,17 +33,19 @@ DOWNLOAD_DELAY = 5
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
 
+DEPTH_LIMIT = 0
+
 # Disable Telnet Console (enabled by default)
 TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-   'Accept-Encoding': 'gzip',
-   'Accept-Language': 'ru-RU,ru;q=0.3',
-   'Host': 'www.avito.ru',
+   'Accept': 'text/html,application/xhtml+xml,application/xml',
+   'Accept-Encoding': 'gzip, deflate, br',
+   'Accept-Language': 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+   'Cache-Control': 'max-age=0',
    'Connection': 'keep-alive',
-   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1',
+   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
 }
 
 # Enable or disable spider middlewares

@@ -1,6 +1,6 @@
 import urllib.request, socket, urllib.error
 
-socket.setdefaulttimeout(60)
+socket.setdefaulttimeout(30)
 
 def is_bad_proxy(pip):
     try:
